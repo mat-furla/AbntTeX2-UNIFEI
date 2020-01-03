@@ -1,0 +1,69 @@
+% Classe do documento
+% -----------------------------------------------------
+\documentclass[12pt,oneside,a4paper,english,brazil]{abntex2}
+% -----------------------------------------------------
+
+% -----------------------------------------------------
+% Pacotes básicos 
+% -----------------------------------------------------	
+\usepackage{lmodern}			% Fonte Latin Modern
+%\usepackage{times}				% Fonte Times New Roman
+\usepackage[T1]{fontenc}		% Seleção de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% Para melhorias de justificação
+\usepackage{enumitem}           % Para realizar enumerações com ítens
+\frenchspacing					% Retira espaço extra obsoleto entre as frases.
+\usepackage{unifei} 			% Modificação do abntex2 para unifei
+% -----------------------------------------------------	
+
+% -----------------------------------------------------
+% Pacotes adicionais
+% -----------------------------------------------------	
+\usepackage{lipsum}				% para geração de dummy text
+% -----------------------------------------------------	
+
+% -----------------------------------------------------
+% Configurações gerais do PDF gerado (cor dos links, etc)
+% Parte destes dados são gerados automaticamente.
+% -----------------------------------------------------	
+\makeatletter
+\hypersetup{
+	%pagebackref=true,
+	pdftitle={\@title}, 
+	pdfauthor={\@author},
+	pdfsubject={\imprimirpreambulo},
+	pdfcreator={Zé da Silva},
+	pdfkeywords={abntex2}{unifei}{latex}{texto}, 
+	colorlinks=true,    % Links coloridos. Falso para criar caixas ao redor
+	linkcolor=black,    % Cor de links internos (seções, etc)
+	citecolor=black,    % Cor de links para a bibliografia
+	filecolor=magenta,  % Cor de links para arquivos
+	urlcolor=blue,      % Cor de links para URLs da web
+	bookmarksdepth=4
+}
+\makeatother
+% -----------------------------------------------------	
+
+% -----------------------------------------------------
+% Informações da capa e folha de rosto
+% -----------------------------------------------------	
+\instituicao{Universidade Federal de Itajubá - unifei}
+\departamento{Instituto de Engenharia de Sistemas e Tecnologia da Informação - IESTI}
+\autor{Autor - 0000000000}
+\titulo{Modelo \LaTeX\ para UNIFEI}
+\subtitulo{Modificação do pacote \abnTeX}
+\data{ANO}
+\local{Itajubá}
+\preambulo{Modelo de trabalho científico realizado em \LaTeX\ contendo
+		   modificações para a classe \abnTeX\ de modo a adequar as regras
+	   	   da Universidade Federal de Itajubá - UNIFEI}
+\orientador{Prof. Dr. Nome do Professor}
+% -----------------------------------------------------	
+
+% -----------------------------------------------------
+% Compila o índice
+% -----------------------------------------------------	
+\makeindex
