@@ -16,21 +16,60 @@
 %% Further information about abnTeX2 are available on http://abntex2.googlecode.com/
 %%
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesPackage{abntex2-unifei}[2020/01/01 v0.1 AbnTeX2-UNIFEI]
+\ProvidesPackage{unifei}[2020/01/01 v1 AbnTeX2-UNIFEI]
+
 
 % -----------------------------------------------------------------------------
-% Configuracao do sumario
+% Pacotes
+% -----------------------------------------------------------------------------
+\usepackage[T1]{fontenc}                       % Seleção de codigos de fonte.
+\usepackage[utf8]{inputenc}                    % Cconversão automática dos acentos
+\usepackage{indentfirst}                       % Indenta o primeiro parágrafo de cada seção
+\usepackage{color}                             % Controle das cores
+\usepackage{graphicx}                          % Inclusão de gráficos
+\usepackage{microtype}                         % Para melhorias de justificação
+\usepackage{enumitem}                          % Para realizar enumerações com ítens
+\frenchspacing                                 % Retira espaço extra obsoleto entre as frases
+\usepackage{mathptmx}                          % Fonte Times New Roman
+\usepackage{amsmath,amssymb}                   % Símbolos matematicos
+\usepackage[brazilian,hyperpageref]{backref}   % Paginas com as citações na bibliografia
+\usepackage[alf,abnt-emphasize=bf]{abntex2cite}% Citações padrão ABNT
+% -----------------------------------------------------------------------------
+
+
+% -----------------------------------------------------------------------------
+% Configurações gerais do PDF gerado (cor dos links, etc)
+% -----------------------------------------------------------------------------
+\makeatletter
+\hypersetup{
+	%pagebackref=true,
+	pdftitle={\@title}, 
+	pdfauthor={\@author},
+	pdfsubject={\imprimirpreambulo},
+	pdfcreator={\@author},
+	colorlinks=true,    % Links coloridos. Falso para criar caixas ao redor
+	linkcolor=black,    % Cor de links internos (seções, etc)
+	citecolor=black,    % Cor de links para a bibliografia
+	filecolor=magenta,  % Cor de links para arquivos
+	urlcolor=blue,      % Cor de links para URLs da web
+	bookmarksdepth=4
+}
+\makeatother
+% -----------------------------------------------------------------------------
+
+
+% -----------------------------------------------------------------------------
+% Configuração do sumário
 % -----------------------------------------------------------------------------
 % Modifica o espaçamento no sumário
-% Nao ha espacos, exceto para as entradas de capitulos
 \setlength{\cftbeforeparagraphskip}{0pt}
 \setlength{\cftbeforesubsectionskip}{0pt}
 \setlength{\cftbeforesectionskip}{0pt}
 \setlength{\cftbeforesubsubsectionskip}{0pt}
 \setlength{\cftbeforechapterskip}{0pt}
 
-% Modifica a formatacao dos textos
-% Secao Primaria (Chapter): Caixa alta, Negrito, tamanho 12
+% Modifica o título das seções
+% Seção primária (chapter): Caixa alta, Negrito, tamanho 12
 \makeatletter
 \settocpreprocessor{chapter}{%
 	\let\tempf@rtoc\f@rtoc%
@@ -39,74 +78,72 @@
 }
 \makeatother
 
-% Secao secundaria (Section) Caixa baixa, Negrito, tamanho 12
+% Seção secundária (section): Negrito, tamanho 12
 \renewcommand*{\cftsectionfont}{\bfseries}
-% Secao terciaria (Subsection) Caixa baixa, tamanho 12
+% Seção terciária (subsection): tamanho 12
 \renewcommand*{\cftsubsectionfont}{\normalfont}
-% Secao quaternaria (Subsubsection) Caixa baixa, tamanho 12
+% Seção quaternária (subsubsection): tamanho 12
 \renewcommand*{\cftsubsubsectionfont}{\normalfont}
-% Seção quinaria (subsubsubsection) Caixa baixa, tamanho 12
+% Seção quinária (subsubsubsection): tamanho 12
 \renewcommand*{\cftparagraphfont}{\normalfont}
 
+% Modifica número de página sem negrito
+\renewcommand{\cftchapterpagefont}{\normalfont}   
+\renewcommand{\cftsectionpagefont}{\normalfont} 
 
-% Corrige tabulação sem negrito
+% Modifica tabulação sem negrito
 \renewcommand*{\cftchapterleader}{
 	\normalfont\cftdotfill{\cftsectiondotsep}}
-
 % -----------------------------------------------------------------------------
 
+
 % -----------------------------------------------------------------------------
-% Formatacao das paginas
+% Formatação das páginas
 % -----------------------------------------------------------------------------
-% Definicao das margens e espaçamentos
+% Definição das margens e espaçamentos
 \setlrmarginsandblock{3cm}{2cm}{*} % externa / interna
 \setulmarginsandblock{3cm}{2cm}{*} % superior / inferior
 \checkandfixthelayout
 
-% Recuo do paragrafo
+% Recuo do parágrafo
 \setlength{\parindent}{1.3cm}
-% sem espaco entre os paragrafos
+% Sem espaço entre os parágrafos
 \setlength{\parskip}{0cm}
 
-% Espacamentos nos titulos:
-% chapter
+% Espaçamento nos títulos
+% Seção primária (chapter)
 \setlength{\beforechapskip}{\onelineskip}
 \setlength{\afterchapskip}{\onelineskip}
-
-% section
+% Seção secundária (section)
 \setbeforesecskip{\onelineskip}
 \setaftersecskip{\onelineskip}
-
-% subsection
+% Seção terciária (subsection)
 \setbeforesubsecskip{\onelineskip}
 \setaftersubsecskip{\onelineskip}
-
-% subsubsection
+% Seção quaternária (subsubsection)
 \setbeforesubsubsecskip{\onelineskip}
 \setaftersubsubsecskip{\onelineskip}
 
-% Capitulo  Negrito + MakeUpperCase (via chapter=TITLE)
+% Modifica o título das seções
+% Seção primária (chapter): negrito, maiúsculo
 \renewcommand{\ABNTEXchapterfont}{\bfseries}
 \renewcommand{\ABNTEXchapterfontsize}{\normalsize}
 \setboolean{ABNTEXupperchapter}{true}
-
-% Section Negrito
+% Seção secundária (section): negrito
 \renewcommand{\ABNTEXsectionfont}{\bfseries}
 \renewcommand{\ABNTEXsectionfontsize}{\normalsize}
-
-% Subsecao
+% Seção terciária (subsection)
 \renewcommand{\ABNTEXsubsectionfont}{}
 \renewcommand{\ABNTEXsubsectionfontsize}{\normalsize}
-
-% SubSubSecao letra minúscula
+% Seção quaternária (subsubsection)
 \renewcommand{\ABNTEXsubsubsectionfont}{}
 \renewcommand{\ABNTEXsubsubsectionfontsize}{\normalsize}
 \setsubsubsecheadstyle{\ABNTEXsubsubsectionfont\ABNTEXsubsubsectionfontsize
 	\ABNTEXsubsubsectionupperifneeded]}
-
-% SubSubSubSecao Caixa baixa, tamanho 12
+% Seção quinária (subsubsection)
 \setparaheadstyle{\normalfont\ABNTEXsubsubsectionfont\ABNTEXsubsubsectionfontsize}
 % -----------------------------------------------------------------------------
+
 
 % -----------------------------------------------------------------------------
 % Novos comandos
@@ -126,28 +163,18 @@
 
 \setfloatlocations{quadro}{hbtp}
 
-% Legendas utilizadas em Figuras / Tabelas / Etc.
-\newcommand{\foa}{\legend{Fonte: Elaborada pelo autor.}}
-\newcommand{\fad}[1]{\legend{Fonte: Adaptada de \citeonline{#1}.}}
-\newcommand{\fod}[1]{\legend{Fonte: \citeonline{#1}.}}
-\newcommand{\fodp}{\legend{Fonte: Dados da pesquisa.}}
-
 % Comando departamento
 \providecommand{\imprimirdepartamento}{}
 \newcommand{\departamento}[1]{\renewcommand{\imprimirdepartamento}{#1}}
 
-% Comando subtitulo
+% Comando turma
+\providecommand{\imprimirturma}{}
+\newcommand{\turma}[1]{\renewcommand{\imprimirturma}{#1}}
+
+% Comando subtítulo
 \providecommand{\imprimirsubtitulo}{}
 \newcommand{\subtitulo}[1]{\renewcommand{\imprimirsubtitulo}{#1}}
-% -----------------------------------------------------------------------------
 
-% -----------------------------------------------------------------------------
-% Citacoes
-% -----------------------------------------------------------------------------
-% Paginas com as citações na bibl
-\usepackage[brazilian,hyperpageref]{backref}
-% Citações padrão ABNT, com referências em negrito
-\usepackage[alf,abnt-emphasize=bf]{abntex2cite}  
 % Configurações do pacote backref
 % Usado sem a opção hyperpageref de backref
 \renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
@@ -164,53 +191,81 @@
 	\fi}%
 % -----------------------------------------------------------------------------
 
+
 % -----------------------------------------------------------------------------
-% Formatacao da capa
+% Formatação da capa
 % -----------------------------------------------------------------------------
 \renewcommand{\imprimircapa}{
 	\begin{capa}
 		\center
+		% Imprime instituição
 		{\ABNTEXchapterfont\bfseries\MakeUppercase\imprimirinstituicao}\par
-		{\ABNTEXchapterfont\bfseries\MakeUppercase\imprimirdepartamento}\par
+		% Imprime departamento
+		{\ABNTEXchapterfont\bfseries\MakeUppercase\imprimirdepartamento}\noindent\par
+
+		\bigskip
+
+		% Imprime autor
 		{\ABNTEXsubsectionfont\MakeUppercase\imprimirautor}\noindent\par
+		% Imprime turma
+		{\ABNTEXsubsectionfont\imprimirturma}\noindent\par
+		
 		\vfill
-		\begin{minipage}{.5\textwidth}
+
+		\begin{minipage}{\textwidth}
 			\centering
+			% Imprime título
 			{\ABNTEXchapterfont\bfseries\MakeUppercase\imprimirtitulo} \par
+			% Imprime subtítulo
 			{\ABNTEXsubsectionfont\imprimirsubtitulo}
 		\end{minipage}
+
 		\vfill
+
+		% Imprime local
 		{\bfseries\MakeUppercase\imprimirlocal\\}
+		% Imprime data
 		{\bfseries\imprimirdata}
 	\end{capa}
 }
 % -----------------------------------------------------------------------------
 
+
 % -----------------------------------------------------------------------------
-% Formatacao da folha de rosto
+% Formatação da folha de rosto
 % -----------------------------------------------------------------------------
 \makeatletter
 \renewcommand{\folhaderostocontent}{
 	\begin{center}
+		% Imprime autor
 		{\ABNTEXsubsectionfont\MakeUppercase\imprimirautor}\noindent\par
 		
-		%\vspace*{10cm}
+        %\vspace*{10cm}
 		\vfill
-		\begin{minipage}{.5\textwidth}
+		
+		\begin{minipage}{\textwidth}
 			\centering
+			% Imprime título
 			{\ABNTEXchapterfont\bfseries\MakeUppercase\imprimirtitulo} \par
+			% Imprime subtítulo
 			{\ABNTEXsubsectionfont\imprimirsubtitulo}
 		\end{minipage}
 		
 		\hspace{.45\textwidth}
 		\begin{minipage}{.5\textwidth}
 			\SingleSpacing
+			% Imprime preâmbulo
 			\imprimirpreambulo
 			\bigskip
+			% Imprime orientador
 			\noindent \par {\bfseries Orientador:} \imprimirorientador
 		\end{minipage}
+		
 		\vfill
+
+		% Imprime local
 		{\bfseries\MakeUppercase\imprimirlocal\\}
+		% Imprime data
 		{\bfseries\imprimirdata}
 	\end{center}
 }

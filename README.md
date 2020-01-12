@@ -62,11 +62,6 @@ O AbnTeX2-UNIFEI fornece os seguintes comandos adiconais:
 ```
 \departamento{nome do departamento} % o nome do departamento
 \subtitulo{Subtitulo do trabalho} % como o título deve ser em caixa alta, mas o subtitulo não, há esse novo comando (ele inclui o : ao final do título)
-%---
-\foa % equivale a {\legend{Fonte: Elaborada pelo autor.}}
-\fad{cite} % equivale a {\legend{Fonte: Adaptada de \citeonline{cite}.}}
-\fod{cite} % equivale a {\legend{Fonte: \citeonline{cite}.}}
-\fodp % equivale a {\legend{Fonte: Dados da pesquisa.}}
 ```
 
 Dicas
